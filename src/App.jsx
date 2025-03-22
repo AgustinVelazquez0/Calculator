@@ -1,35 +1,87 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from "react";
+import "./App.css";
 
-function App() {
-  const [count, setCount] = useState(0)
+const Calculator = () => {
+  const [input, setInput] = useState("0");
+
+  const handleClick = (value) => {
+    if (input === "0" && value !== ".") {
+      setInput(value);
+    } else {
+      setInput(input + value);
+    }
+  };
+
+  const handleClear = () => {
+    setInput("0");
+  };
+
+  const handleEquals = () => {
+    try {
+      setInput(eval(input).toString());
+    } catch (_) {
+      setInput("Error");
+    }
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+    <div className="calculator">
+      <div id="display">{input}</div>
+      <div className="buttons">
+        <button id="clear" onClick={handleClear} className="op">
+          C
         </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+        <button id="divide" onClick={() => handleClick("/")} className="op">
+          /
+        </button>
+        <button id="multiply" onClick={() => handleClick("*")} className="op">
+          *
+        </button>
+        <button id="subtract" onClick={() => handleClick("-")} className="op">
+          -
+        </button>
+        <button id="seven" onClick={() => handleClick("7")} className="num">
+          7
+        </button>
+        <button id="eight" onClick={() => handleClick("8")} className="num">
+          8
+        </button>
+        <button id="nine" onClick={() => handleClick("9")} className="num">
+          9
+        </button>
+        <button id="add" onClick={() => handleClick("+")} className="op">
+          +
+        </button>
+        <button id="four" onClick={() => handleClick("4")} className="num">
+          4
+        </button>
+        <button id="five" onClick={() => handleClick("5")} className="num">
+          5
+        </button>
+        <button id="six" onClick={() => handleClick("6")} className="num">
+          6
+        </button>
+        <button id="equals" onClick={handleEquals} className="op">
+          =
+        </button>
+        <button id="one" onClick={() => handleClick("1")} className="num">
+          1
+        </button>
+        <button id="two" onClick={() => handleClick("2")} className="num">
+          2
+        </button>
+        <button id="three" onClick={() => handleClick("3")} className="num">
+          3
+        </button>
+        <button id="zero" onClick={() => handleClick("0")} className="num">
+          0
+        </button>
+        <button id="decimal" onClick={() => handleClick(".")} className="num">
+          .
+        </button>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    </div>
+  );
+};
 
-export default App
+export default Calculator;
